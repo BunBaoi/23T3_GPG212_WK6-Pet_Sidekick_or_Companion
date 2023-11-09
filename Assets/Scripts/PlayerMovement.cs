@@ -19,7 +19,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private string MouseXInput = "Mouse X";
     [SerializeField] private string MouseYinput = "Mouse Y";
 
-
     public Camera mainCamera;
     private float verticalRotation;
     private CharacterController characterController;
@@ -28,8 +27,8 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         characterController = GetComponent<CharacterController>();
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         mainCamera = Camera.main;
     }
 

@@ -14,28 +14,36 @@ public class CompanionScript : MonoBehaviour
     public Animator companionAni;
     Vector3 dest;
 
+    public enum State
+    {
+        follow,
+        idle,
+        going,
+        talking
+    }
+
+    public State state;
+
+
     [Header("Crosshair")]
     public Image crossHair;
     public Sprite onLookUI;
 
     [Header("UI Menu")]
-    public bool UiSwitch;
-    public RingMenu MainMenuPreFab;
-    protected RingMenu MainMenuInstance;
+    public UiWheelController uiWheelController;
 
     //public ControllerMode Mode;
+    public Transform goal;
 
-    private void Start()
+    public void Start()
     {
         //SetMode(ControllerMode.Play);
+        state = State.going;
+
     }
 
-    private void Update()
+    void Update()
     {
-
-
-        dest = player.position;
-        ai.destination = dest;
 
         /*
          Animation
@@ -65,6 +73,33 @@ public class CompanionScript : MonoBehaviour
             
         }
         */
+
+        switch(state)
+        {
+            case State.follow:
+
+                dest = player.position;
+                ai.destination = dest;
+
+                Debug.Log("Following");
+                break;
+            case State.idle:
+
+                Debug.Log("Idling");
+                break;
+            case State.going:
+
+                //ai.SetDestination(goal.position);
+                ai.destination = goal.position;
+                Debug.Log("Going");
+                break;
+            case State.talking:
+
+                Debug.Log("Talking");
+                break;
+        }
+
+
     }
 
     // Menu on companion
@@ -76,7 +111,10 @@ public class CompanionScript : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E))
         {
             //UiWheelController.
+            uiWheelController.uiWheelSelected = !uiWheelController.uiWheelSelected;
+            //UiSwitch = true;
         }
+
 
 
         /*

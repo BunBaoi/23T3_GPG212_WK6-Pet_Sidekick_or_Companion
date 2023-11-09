@@ -11,21 +11,33 @@ public class UiWheelController : MonoBehaviour
     public Sprite noImage;
     public static int statusID;
 
+    [Header("Player Information")]
+    public GameObject player;
+    //public GameObject companionScript;
+    public CompanionScript companionScript;
+    public void Start()
+    {
+
+    }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            uiWheelSelected = !uiWheelSelected;
-        }
-
         if (uiWheelSelected)
         {
             ani.SetBool("OpenUiWheel", true);
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = true;
+
+            //player.gameObject.GetComponent<PlayerMovement>().enabled = false;
         }
         else
         {
             ani.SetBool("OpenUiWheel", false);
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+
+
+            player.gameObject.GetComponent<PlayerMovement>().enabled = true;
         }
 
 
@@ -36,16 +48,20 @@ public class UiWheelController : MonoBehaviour
                 selectedAction.sprite = noImage;
                 break;
             case 1: // Follow
-                Debug.Log("Follow");
+                Debug.Log("Case Follow");
+                companionScript.state = CompanionScript.State.follow;
                 break;
             case 2: // Stop
-                Debug.Log("Stop");
+                Debug.Log("Case Stop");
+                companionScript.state = CompanionScript.State.idle;
                 break;
             case 3: // Go to
-                Debug.Log("Go to");
+                Debug.Log("Case going");
+                companionScript.state = CompanionScript.State.going;
                 break;
             case 4: // Interact
-                Debug.Log("Talk that talk");
+                Debug.Log("Case Talk that talk");
+                companionScript.state = CompanionScript.State.talking;
                 break;
         }
     }

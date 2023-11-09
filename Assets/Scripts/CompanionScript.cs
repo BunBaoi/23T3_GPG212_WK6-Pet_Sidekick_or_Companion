@@ -32,6 +32,9 @@ public class CompanionScript : MonoBehaviour
     [Header("UI Menu")]
     public UiWheelController uiWheelController;
 
+    [Header("Audio")]
+    public AudioSource audioData;
+
     //public ControllerMode Mode;
     public Transform goal;
 
@@ -76,25 +79,28 @@ public class CompanionScript : MonoBehaviour
 
         switch(state)
         {
+            // Follow player
             case State.follow:
-
                 dest = player.position;
                 ai.destination = dest;
-
                 Debug.Log("Following");
                 break;
-            case State.idle:
 
+            // Idle
+            case State.idle:
                 Debug.Log("Idling");
                 break;
-            case State.going:
 
+            // Going to location
+            case State.going:
                 //ai.SetDestination(goal.position);
                 ai.destination = goal.position;
                 Debug.Log("Going");
                 break;
-            case State.talking:
 
+            // Talking audio
+            case State.talking:
+                audioData.Play();
                 Debug.Log("Talking");
                 break;
         }
@@ -115,23 +121,6 @@ public class CompanionScript : MonoBehaviour
             //UiSwitch = true;
         }
 
-
-
-        /*
-        if (Mode == ControllerMode.Play)
-        {
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                
-                SetMode(ControllerMode.Menu);
-                Debug.Log(Mode);
-
-                MainMenuInstance = Instantiate(MainMenuPreFab, FindAnyObjectByType<Canvas>().transform);
-                MainMenuInstance.callback = MenuClick;
-            }
-
-        }
-        */
     }
 
     public void OnMouseExit()
@@ -140,45 +129,4 @@ public class CompanionScript : MonoBehaviour
         crossHair.color = new Color(0.0f, 0.0f, 0.0f, 1.0f);
 
     }
-    /*
-    private void MenuClick(string path)
-    {
-        Debug.Log(path);
-        var paths = path.Split('/');
-
-        SetMode(ControllerMode.Play);
-    }
-
-    public void SetMode(ControllerMode mode)
-    {
-        Mode = mode;
-        //if (mode != ControllerMode.Menu && MainMenuInstance != null)
-        //    Destroy(MainMenuInstance);
-
-
-        if (mode == ControllerMode.Menu)
-            Destroy(MainMenuInstance);
-
-        switch (mode)
-        {
-            // Unlock Mouse
-            case ControllerMode.Menu:
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
-                break;
-
-            // Lock Mouse
-            case ControllerMode.Play:
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
-                break;
-        }
-    }
-
-    public enum ControllerMode
-    {
-        Play,
-        Menu,
-    }
-    */
 }

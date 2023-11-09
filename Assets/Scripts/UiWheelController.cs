@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class UiWheelController : MonoBehaviour
 {
     public Animator ani;
-    private bool uiWheelSelected = false;
+    public bool uiWheelSelected = false;
     public Image selectedAction;
     public Sprite noImage;
     public static int statusID;
@@ -43,6 +43,9 @@ public class UiWheelController : MonoBehaviour
                 break;
             case 3: // Go to
                 Debug.Log("Go to");
+                break;
+            case 4: // Interact
+                Debug.Log("Talk that talk");
                 break;
         }
     }

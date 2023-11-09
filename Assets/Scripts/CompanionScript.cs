@@ -23,11 +23,11 @@ public class CompanionScript : MonoBehaviour
     public RingMenu MainMenuPreFab;
     protected RingMenu MainMenuInstance;
 
-    public ControllerMode Mode;
+    //public ControllerMode Mode;
 
     private void Start()
     {
-        SetMode(ControllerMode.Play);
+        //SetMode(ControllerMode.Play);
     }
 
     private void Update()
@@ -37,20 +37,21 @@ public class CompanionScript : MonoBehaviour
         dest = player.position;
         ai.destination = dest;
 
-        // Animation
-        //if (!ai.pathPending)
-        //{
-        //    if(ai.remainingDistance <= ai.stoppingDistance)
-        //    {
-        //        companionAni.ResetTrigger("walk");
-        //        companionAni.SetTrigger("idle");
-        //    }
-        //}
-        //else
-        //{
-        //    companionAni.ResetTrigger("idle");
-        //    companionAni.SetTrigger("walk");
-        //}
+        /*
+         Animation
+        if (!ai.pathPending)
+        {
+            if(ai.remainingDistance <= ai.stoppingDistance)
+            {
+                companionAni.ResetTrigger("walk");
+                companionAni.SetTrigger("idle");
+            }
+        }
+        else
+        {
+            companionAni.ResetTrigger("idle");
+            companionAni.SetTrigger("walk");
+        }
 
         if (Mode == ControllerMode.Menu)
         {
@@ -63,6 +64,7 @@ public class CompanionScript : MonoBehaviour
 
             
         }
+        */
     }
 
     // Menu on companion
@@ -71,10 +73,18 @@ public class CompanionScript : MonoBehaviour
         crossHair.sprite = onLookUI;
         crossHair.color = new Color(1.0f, 1.0f, 1.0f, 0.5f);
 
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            //UiWheelController.
+        }
+
+
+        /*
         if (Mode == ControllerMode.Play)
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
+                
                 SetMode(ControllerMode.Menu);
                 Debug.Log(Mode);
 
@@ -83,6 +93,7 @@ public class CompanionScript : MonoBehaviour
             }
 
         }
+        */
     }
 
     public void OnMouseExit()
@@ -91,7 +102,7 @@ public class CompanionScript : MonoBehaviour
         crossHair.color = new Color(0.0f, 0.0f, 0.0f, 1.0f);
 
     }
-
+    /*
     private void MenuClick(string path)
     {
         Debug.Log(path);
@@ -131,4 +142,5 @@ public class CompanionScript : MonoBehaviour
         Play,
         Menu,
     }
+    */
 }
